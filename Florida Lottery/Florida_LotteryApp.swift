@@ -1,17 +1,25 @@
 //
-//  Florida_LotteryApp.swift
-//  Florida Lottery
+//  BarcodeTextScannerApp.swift
+//  BarcodeTextScanner
 //
-//  Created by Tyler Hartman on 12/19/25.
+//  Created by Alfian Losari on 6/25/22.
 //
 
 import SwiftUI
 
 @main
-struct Florida_LotteryApp: App {
+struct BarcodeTextScannerApp: App {
+    
+    @StateObject private var vm = AppViewModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environmentObject(vm)
+                .task {
+                    await vm.requestDataScannerAccessStatus()
+                }
         }
     }
 }
+
